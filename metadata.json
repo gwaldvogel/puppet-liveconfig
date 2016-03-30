@@ -1,0 +1,15 @@
+{
+  "name": "gwaldvogel/liveconfig",
+  "version": "0.1.0",
+  "author": "gwaldvogel",
+  "summary": "Install and update the Liveconfig webhosting panel with Puppet",
+  "license": "MIT",
+  "source": "https://github.com/gwaldvogel/puppet-liveconfig",
+  "project_page": "https://github.com/gwaldvogel/puppet-liveconfig",
+  "issues_url": "https://github.com/gwaldvogel/puppet-liveconfig/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"},
+    {"name":"puppetlabs-apt","version_requirement":">= 2.2.2"}
+  ],
+  "data_provider": null
+}
