@@ -5,7 +5,12 @@
 # A module to install and update Liveconfig webhosting panel from
 # the offical Liveconfig package server.
 #
-
+# Parameters
+# --------
+#
+# [*meta_package*]
+#   If set to true the liveconfig-meta package will be installed
+#
 # Examples
 # --------
 #
@@ -25,7 +30,15 @@
 
 include apt
 
-class liveconfig {
+class liveconfig(
+  $meta_package = any2bool(params_lookup('meta_package')),
+) {
+
+  $meta_package_ensure = $liveconfig::meta_package ? {
+    true    => 'latest',
+    false   => 'absent',
+    default => 'absent',
+  }
 
   # Installing liveconfig key & apt repo
   apt::source { 'liveconfig':
@@ -44,6 +57,11 @@ class liveconfig {
   # Install liveconfig
   package { 'liveconfig':
     ensure  => 'latest',
+    require => apt::source['liveconfig'],
+  }
+
+  package { 'liveconfig-meta':
+    ensure  => $meta_package_ensure,
     require => apt::source['liveconfig'],
   }
 }
