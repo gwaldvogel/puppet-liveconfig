@@ -10,6 +10,8 @@
 #
 # [*meta_package*]
 #   If set to true the liveconfig-meta package will be installed
+# [*meta_package_nginx*]
+#   If set to true the liveconfig-meta-nginx package will be installed
 #
 # Examples
 # --------
@@ -32,9 +34,16 @@ include apt
 
 class liveconfig(
   $meta_package = any2bool(params_lookup('meta_package')),
+  $meta_package_nginx = any2bool(params_lookup('meta_package_nginx')),
 ) {
 
   $meta_package_ensure = $liveconfig::meta_package ? {
+    true    => 'latest',
+    false   => 'absent',
+    default => 'absent',
+  }
+
+  $meta_package_nginx_ensure = $liveconfig::meta_package_nginx ? {
     true    => 'latest',
     false   => 'absent',
     default => 'absent',
@@ -62,6 +71,11 @@ class liveconfig(
 
   package { 'liveconfig-meta':
     ensure  => $meta_package_ensure,
+    require => apt::source['liveconfig'],
+  }
+
+  package { 'liveconfig-meta-nginx':
+    ensure  => $meta_package_nginx_ensure,
     require => apt::source['liveconfig'],
   }
 }
