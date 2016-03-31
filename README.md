@@ -17,3 +17,4 @@ Changelog
 ---------
 
 -	0.1.0 - Added basic manifest
+-	0.2.0 - Added options for the liveconfig-meta and liveconfig-meta-nginx packages
