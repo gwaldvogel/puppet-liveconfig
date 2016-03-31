@@ -1,6 +1,6 @@
 {
   "name": "gwaldvogel/liveconfig",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "gwaldvogel",
   "summary": "Install and update the Liveconfig webhosting panel with Puppet",
   "license": "MIT",
