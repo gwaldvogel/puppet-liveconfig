@@ -1,5 +1,5 @@
-puppet-liveconfig ![Build status](https://api.travis-ci.org/gwaldvogel/puppet-liveconfig.svg)
-=============================================================================================
+puppet-liveconfig [![Build status](https://api.travis-ci.org/gwaldvogel/puppet-liveconfig.svg)](https://travis-ci.org/gwaldvogel/puppet-liveconfig)
+===================================================================================================================================================
 
 Puppet module to install and update [Liveconfig](https://www.liveconfig.com/de)
 
