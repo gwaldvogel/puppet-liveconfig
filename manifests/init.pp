@@ -12,6 +12,8 @@
 #   If set to true the liveconfig-meta package will be installed
 # [*meta_package_nginx*]
 #   If set to true the liveconfig-meta-nginx package will be installed
+# [*licensekey*]
+#   Set the licensekey here to automatically actiavte liveconfig
 #
 # Examples
 # --------

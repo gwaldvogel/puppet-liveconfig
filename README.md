@@ -3,6 +3,15 @@ puppet-liveconfig
 
 Puppet module to install and update [Liveconfig](https://www.liveconfig.com/de)
 
+Parameters
+----------
+
+`meta_package` If set to true the liveconfig-meta package will be installed
+
+`meta_package_nginx` If set to true the liveconfig-meta-nginx package will be installed
+
+`licensekey` Set the licensekey here to automatically actiavte liveconfig
+
 Compatibility
 -------------
 
