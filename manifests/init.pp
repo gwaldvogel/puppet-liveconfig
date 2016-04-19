@@ -35,6 +35,7 @@ include apt
 class liveconfig(
   $meta_package = any2bool(params_lookup('meta_package')),
   $meta_package_nginx = any2bool(params_lookup('meta_package_nginx')),
+  $licensekey = ''
 ) {
 
   $meta_package_ensure = $liveconfig::meta_package ? {
@@ -77,5 +78,17 @@ class liveconfig(
   package { 'liveconfig-meta-nginx':
     ensure  => $meta_package_nginx_ensure,
     require => apt::source['liveconfig'],
+  }
+
+  if $licensekey != '' {
+    exec { 'liveconfig-activation':
+      require     => Package['liveconfig'],
+      command     => 'liveconfig --activate',
+      environment => "LCLICENSEKEY=$licensekey",
+      # TODO: once we give the user the option to modify the config file replace
+      # the path here with the one set by the user
+      creates     => '/etc/liveconfig/liveconfig.key',
+      logoutput   => 'on_failure',
+    }
   }
 }
