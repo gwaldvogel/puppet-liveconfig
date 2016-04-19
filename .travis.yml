@@ -5,17 +5,10 @@ rvm:
   - 2.0.0
   - 2.1.1
   - 2.1.4
+  - 2.3.0
 script:
   - "bundle exec rake validate lint"
 env:
-  - PUPPET_VERSION="~> 2.7.0"
-  - PUPPET_VERSION="~> 3.1.0"
-  - PUPPET_VERSION="~> 3.2.0"
-  - PUPPET_VERSION="~> 3.3.0"
-  - PUPPET_VERSION="~> 3.4.0"
-  - PUPPET_VERSION="~> 3.5.0"
-  - PUPPET_VERSION="~> 3.6.0"
-  - PUPPET_VERSION="~> 3.7.0"
   - PUPPET_VERSION="~> 4.2"
 
 sudo: false
