@@ -84,7 +84,7 @@ class liveconfig(
     exec { 'liveconfig-activation':
       require     => Package['liveconfig'],
       command     => 'liveconfig --activate',
-      environment => "LCLICENSEKEY=$licensekey",
+      environment => "LCLICENSEKEY=${licensekey}",
       # TODO: once we give the user the option to modify the config file replace
       # the path here with the one set by the user
       creates     => '/etc/liveconfig/liveconfig.key',

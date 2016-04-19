@@ -9,4 +9,8 @@
 # Learn more about module testing here:
 # https://docs.puppetlabs.com/guides/tests_smoke.html
 #
-include ::liveconfig
+include liveconfig
+
+class {'liveconfig':
+  meta_package => true,
+}
