@@ -93,6 +93,9 @@ class liveconfig(
 
       $liveconfigrepo = yumrepo['liveconfig-repo']
     }
+    default: {
+      err("Your OS is not supported by the liveconfig module!")
+    }
   }
 
   # Install liveconfig
