@@ -9,7 +9,9 @@
   "issues_url": "https://github.com/gwaldvogel/puppet-liveconfig/issues",
   "dependencies": [
     {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"},
-    {"name":"puppetlabs-apt","version_requirement":">= 2.2.2"}
+    {"name":"puppetlabs-apt","version_requirement":">= 2.2.2"},
+    {"name":"stschulte-rpmkey","version_requirement":">= 1.0.3"},
+    {"name":"example43-puppi","version_requirement":">= 2.1.13"},
   ],
   "data_provider": null,
   "operatingsystem_support": [
@@ -26,6 +28,12 @@
         "14.04",
         "15.04",
         "15.10"
+      ]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "7"
       ]
     }
   ]

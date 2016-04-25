@@ -21,6 +21,15 @@
 # @example
 #    class { 'liveconfig': }
 #
+#    class {'liveconfig':
+#      meta_package => false,
+#    }
+#
+#    class {'liveconfig':
+#      meta_package => false,
+#      licensekey => 'XXXXX-XXXXX-XXXXX',
+#    }
+#
 # Authors
 # -------
 #
@@ -52,34 +61,54 @@ class liveconfig(
     default => 'absent',
   }
 
-  # Installing liveconfig key & apt repo
-  apt::source { 'liveconfig':
-    key      => {
-      id     => 'E0783ADDB3382926C072D1471059DFB908708961',
-      source => 'https://www.liveconfig.com/liveconfig.key',
-    },
-    location => 'http://repo.liveconfig.com/debian/',
-    repos    => 'main',
-    release  => 'main',
-    include  => {
-      deb => true,
-    },
+  case  $operatingsystem {
+    "Debian": {
+      # Installing liveconfig key & apt repo
+      apt::source { 'liveconfig':
+        key      => {
+          id     => 'E0783ADDB3382926C072D1471059DFB908708961',
+          source => 'https://www.liveconfig.com/liveconfig.key',
+        },
+        location => 'http://repo.liveconfig.com/debian/',
+        repos    => 'main',
+        release  => 'main',
+        include  => {
+          deb => true,
+        },
+      }
+
+      $liveconfigrepo = apt::source['liveconfig']
+    }
+    "CentOS": {
+      rpmkey { '08708961':
+        ensure => present,
+        source => 'https://www.liveconfig.com/liveconfig.key',
+      }
+      yumrepo { 'liveconfig-repo':
+        require => rpmkey['08708961'],
+        baseurl => 'http://repo.liveconfig.com/centos/$releasever/',
+        enabled => 1,
+        gpgcheck => 1,
+      }
+
+      $liveconfigrepo = yumrepo['liveconfig-repo']
+    }
   }
 
   # Install liveconfig
   package { 'liveconfig':
     ensure  => 'latest',
-    require => apt::source['liveconfig'],
+    require => $liveconfigrepo,
   }
 
   package { 'liveconfig-meta':
     ensure  => $meta_package_ensure,
-    require => apt::source['liveconfig'],
+    require => $liveconfigrepo,
   }
 
   package { 'liveconfig-meta-nginx':
     ensure  => $meta_package_nginx_ensure,
-    require => apt::source['liveconfig'],
+    require => $liveconfigrepo,
   }
 
   if $licensekey != '' {
